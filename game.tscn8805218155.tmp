@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://basgnhy5a0363"]
+
+[ext_resource type="Script" uid="uid://rjfdwi1s4hun" path="res://ball.gd" id="1_80nbo"]
+[ext_resource type="Shader" uid="uid://dj5qy8t5cu0xt" path="res://game.gdshader" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://cd0hy0nh0w7er" path="res://circle.gd" id="3_feb5d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fc0e3"]
+shader = ExtResource("2_e2o6t")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TargetArea" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ball" type="Area2D" parent="TargetArea"]
+script = ExtResource("1_80nbo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea/ball"]
+shape = SubResource("RectangleShape2D_80nbo")
+
+[node name="Sprite2D" type="Sprite2D" parent="TargetArea/ball"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="TargetArea/ball"]
+material = SubResource("ShaderMaterial_fc0e3")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Node2D" type="Node2D" parent="TargetArea/ball"]
+script = ExtResource("3_feb5d")
