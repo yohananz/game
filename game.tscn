@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://basgnhy5a0363"]
+[gd_scene load_steps=5 format=3 uid="uid://basgnhy5a0363"]
 
 [ext_resource type="Script" uid="uid://bqke3wpuxg26h" path="res://target.gd" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://b0tsuwa0mcfpv" path="res://draggable.gd" id="2_feb5d"]
+[ext_resource type="Script" uid="uid://dujxdo6mx6s12" path="res://top_bar.gd" id="3_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://cg4rxcr4y1qdi" path="res://heart_3d_small.png" id="3_feb5d"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -10,3 +12,28 @@ script = ExtResource("1_e2o6t")
 
 [node name="DraggableObject" type="Node2D" parent="."]
 script = ExtResource("2_feb5d")
+
+[node name="TopBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_fc0e3")
+metadata/_edit_use_anchors_ = true
+
+[node name="HeartRateLabel" type="Label" parent="TopBar"]
+layout_mode = 2
+offset_top = 30.0
+offset_right = 83.0
+offset_bottom = 80.0
+text = "Heart Rate"
+metadata/_edit_use_anchors_ = true
+
+[node name="HeartImage" type="TextureRect" parent="TopBar"]
+layout_mode = 2
+offset_right = 110.0
+offset_bottom = 110.0
+texture = ExtResource("3_feb5d")
+metadata/_edit_use_anchors_ = true
