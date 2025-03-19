@@ -23,17 +23,23 @@ size_flags_vertical = 3
 script = ExtResource("3_fc0e3")
 metadata/_edit_use_anchors_ = true
 
-[node name="HeartRateLabel" type="Label" parent="TopBar"]
-layout_mode = 2
-offset_top = 30.0
-offset_right = 83.0
-offset_bottom = 80.0
-text = "Heart Rate"
-metadata/_edit_use_anchors_ = true
-
 [node name="HeartImage" type="TextureRect" parent="TopBar"]
-layout_mode = 2
+layout_mode = 0
 offset_right = 110.0
 offset_bottom = 110.0
 texture = ExtResource("3_feb5d")
 metadata/_edit_use_anchors_ = true
+
+[node name="HeartRateLabel" type="Label" parent="TopBar"]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 39.0
+offset_bottom = 31.0
+text = "HR: ?"
+
+[node name="HeartRateLabel2" type="Label" parent="TopBar"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 33.0
+offset_right = 600.0
+offset_bottom = 56.0

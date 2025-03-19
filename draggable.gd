@@ -1,7 +1,9 @@
 extends Node2D
 
-@onready var heart_rate_label = get_parent().get_node_or_null("TopBar/HeartRateLabel")
-@onready var heart_image = get_parent().get_node_or_null("TopBar/HeartImage")
+
+@onready var heart_image = $HeartImage  # ✅ Ensure this exists
+@onready var heart_rate_label = $HeartRateLabel  # ✅ Ensure this exists
+
 
 var heart_rate_values = []
 var current_index = 0
@@ -13,16 +15,42 @@ var previous_hr = -1
 var current_hr = -1  # Set by timer only.
 
 func _ready():
+	var label = get_node("HeartRateLabel2")  # Make sure the path is correct
+
+	if label and label is Control:  # ✅ Ensure the label exists and is a Control node
+		# ✅ Correct the anchor settings
+		label.set_anchors_preset(Control.PRESET_TOP_WIDE)  # Top and centered
+
+		# ✅ Make sure the text is centered
+		label.set("theme_override_font_sizes/font_size", 24)  # Increase font size (optional)
+		label.set("theme_override_colors/font_color", Color(1, 1, 1))  # White text (optional)
+
+		# ✅ Set position in the center at the top
+		label.rect_position.x = (get_viewport_rect().size.x - label.rect_size.x) / 2
+		label.rect_position.y = 20  # Push slightly down from the top
+
+		print("✅ HeartRateLabel2 correctly positioned at the top center!")
+
+	else:
+		print("❌ Error: HeartRateLabel2 not found or not a Control node!")
+
+	# ✅ Other game logic
 	randomize()
 	position_far_from_target()
 	load_heart_rate_data()
 	setup_timer()
+
+	if heart_rate_label:
+		print("✅ HeartRateLabel successfully found!")
+	else:
+		print("❌ Error: HeartRateLabel is NULL! Check your scene tree.")
 
 	# ✅ Force first heartbeat update
 	if heart_rate_values.size() > 0:
 		current_hr = heart_rate_values[0]
 		get_parent().get_node("TopBar").update_bpm(current_hr)
 		animate_heart()
+
 
 func position_far_from_target():
 	var viewport_size = get_viewport_rect().size
@@ -102,6 +130,7 @@ func animate_heart():
 	tween.tween_property(heart_image, "scale", Vector2(1, 1), 0.2).set_delay(0.2)
 
 func _process(delta):
+	
 	if current_hr == -1:
 		return  # Skip until timer initializes first HR value
 
